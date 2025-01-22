@@ -2,6 +2,10 @@
 @rendermode InteractiveServer
 
 <h3>Todo</h3>
+
+<input @bind="newTodo" />
+<button @onclick="AddTodo">Add todo</button>
+
 <ul>
     @foreach (var todo in todos)
     {
@@ -10,5 +14,15 @@
 </ul>
 
 @code {
+    string newTodo = string.Empty;
     private List<TodoItem> todos = new();
+
+    void AddTodo()
+    {
+        if (!String.IsNullOrWhiteSpace(newTodo))
+        {
+            todos.Add(new TodoItem { Title = newTodo });
+            newTodo = string.Empty;
+        }
+    }
 }
